@@ -14,7 +14,7 @@ public class PriorityQueueTests
     // checking the full list for priority items. 
     public void TestPriorityQueue_1()
     {
-        string[] expectedResult = {"high2", "high1","mid2", "mid1", "low2", "low1"};
+        string[] expectedResult = ["high2", "high1","mid2", "mid1", "low2", "low1"];
 
         var priorityQueue = new PriorityQueue();
         priorityQueue.Enqueue("low1", 1);
