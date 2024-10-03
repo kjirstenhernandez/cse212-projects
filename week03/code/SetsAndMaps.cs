@@ -36,7 +36,6 @@ public static class SetsAndMaps
 
         }
     
-        // TODO Problem 1 - ADD YOUR CODE HERE
         return symmetricals.ToArray();
     }
 
@@ -89,8 +88,50 @@ public static class SetsAndMaps
 
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Building a dictionary with the first word
+        Dictionary<char, int> firstWord = new Dictionary<char,int>();
+        string comb1 = word1.ToUpper();  //eliminating need for case
+        string result1 = comb1.Replace(" ", "");//combining words into one blob of letters
+        foreach(char element in result1){
+            if (!firstWord.ContainsKey(element)){ //checking to see if that character is already in teh dictionary
+                firstWord[element] = 1;
+            } else {
+                int value = firstWord[element]; //if it is, increasing instances by 1
+                firstWord[element] = value +1;
+            }
+        }
+
+        // Building a dictionary with the second word
+        Dictionary<char, int> secondWord = new Dictionary<char,int>();
+        string comb2 = word2.ToUpper(); 
+        string result2 = comb2.Replace(" ", ""); 
+        foreach(char element in result2){
+            if (!secondWord.ContainsKey(element)){
+                secondWord[element] = 1;
+            } else {
+                int value = secondWord[element];
+                secondWord[element] = value +1;
+            }
+        }
+        
+        if (secondWord.Count != firstWord.Count) {
+            return false;
+        }
+
+        foreach(var item in firstWord) {
+            if (!secondWord.ContainsKey(item.Key)){
+                return false;
+            } else {
+                if (item.Value != secondWord[item.Key]){
+                    return false;
+                }
+                
+                } 
+        }
+
+        return true;
+ 
+        
     }
 
     /// <summary>
