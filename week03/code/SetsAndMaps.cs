@@ -21,8 +21,23 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
+        List<string> symmetricals = new List<string>();
+        // string[] symmetricals = new string[(words.Length+1) / 2]; // creating a fixed array to hold the future matches (max space needed is if every word in teh array had a symmetrical match);
+        HashSet<string> hash = new(words);
+        
+        foreach (string word in words) {
+            if (word[1] != word[0]) {
+                string checkWord = word[1].ToString() + word[0].ToString();
+                if (hash.Contains(checkWord)) {
+                    symmetricals.Add($"{word} & {checkWord}");
+                    hash.Remove(word);
+                }   
+            }
+
+        }
+    
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        return symmetricals.ToArray();
     }
 
     /// <summary>
@@ -64,6 +79,9 @@ public static class SetsAndMaps
     /// Reminder: You can access a letter by index in a string by 
     /// using the [] notation.
     /// </summary>
+    ///
+
+
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
